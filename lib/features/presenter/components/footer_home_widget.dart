@@ -2,10 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marvel_mottu/features/presenter/controllers/home_controller.dart';
 
-class FooterHomeWidget extends StatelessWidget {
-  FooterHomeWidget({super.key});
+class FooterHomeWidget extends StatefulWidget {
+  FooterHomeWidget({Key? key}) : super(key: key);
+
+  @override
+  _FooterHomeWidgetState createState() => _FooterHomeWidgetState();
+}
+
+class _FooterHomeWidgetState extends State<FooterHomeWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   final controller = Get.find<HomeController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+    _animationController.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,21 +85,25 @@ class FooterHomeWidget extends StatelessWidget {
                                         radius: 20,
                                         backgroundColor:
                                             Theme.of(context).primaryColor,
-                                        child: Text(
-                                          pageToShow,
-                                          style: const TextStyle(
+                                        child: FadeTransition(
+                                          opacity: _animation,
+                                          child: Text(
+                                            pageToShow,
+                                            style: const TextStyle(
                                               color: Colors.white,
-                                              fontSize: 18),
+                                              fontSize: 18,
+                                            ),
+                                          ),
                                         ),
                                       )
                                     : Text(
                                         pageToShow,
                                         style: TextStyle(
-                                            color: isIndexSelected
-                                                ? Colors.white
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                            fontSize: 16),
+                                          color: isIndexSelected
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontSize: 16,
+                                        ),
                                       ),
                               );
                             },

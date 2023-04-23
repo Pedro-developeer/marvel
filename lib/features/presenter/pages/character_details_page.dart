@@ -48,7 +48,7 @@ class CharacterDetailsPage extends StatelessWidget {
                       const SizedBox(height: 12),
                       Text(
                         character.description.isEmpty
-                            ? 'No Description'
+                            ? 'Sem descrição'
                             : character.description,
                         style: const TextStyle(
                           fontSize: 14,
@@ -57,19 +57,11 @@ class CharacterDetailsPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Text(
+                      const Text(
                         'Séries',
                         style: TextStyle(
                           fontSize: 32,
                           fontFamily: '.SF UI Display',
-                          color: Colors.transparent,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Theme.of(context).primaryColor,
-                          decorationThickness: 1.5,
-                          shadows: const [
-                            Shadow(offset: Offset(0, -5), color: Colors.black)
-                          ],
                         ),
                       ),
                       const SizedBox(height: 12),

@@ -11,6 +11,13 @@ class CharacterRepositoryImpl implements CharacterRepository {
 
   CharacterRepositoryImpl({required this.characterDataSource});
 
+  /// Obtém uma lista de personagens da API da Marvel, usando a fonte de dados [characterDataSource]
+  ///
+  /// Retorna um [Either] contendo um [Failure] em caso de erro ou um [ResultCharacterEntity] em caso de sucesso.
+  ///
+  /// Em caso de falha, a exceção [ServerException] é lançada e um [ServerFailure] é retornado.
+  ///
+  /// [requestPagination] é um objeto que contém informações sobre a paginação dos resultados.
   @override
   Future<Either<Failure, ResultCharacterEntity>> getCharacters(
       {required RequestPaginationEntity requestPagination}) async {
@@ -21,7 +28,8 @@ class CharacterRepositoryImpl implements CharacterRepository {
       return Right(result);
     } on ServerException {
       return Left(
-          ServerFailure(message: 'Não foi possível obter os personagens'));
+        ServerFailure(message: 'Não foi possível obter os personagens'),
+      );
     }
   }
 }

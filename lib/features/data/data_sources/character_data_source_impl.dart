@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:marvel_mottu/core/errors/exceptions.dart';
 import 'package:marvel_mottu/core/http_client/http_client.dart';
 import 'package:marvel_mottu/core/keys/marvel_api_keys.dart';

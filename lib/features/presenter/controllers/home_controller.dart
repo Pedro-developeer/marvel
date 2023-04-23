@@ -104,29 +104,7 @@ class HomeController extends GetxController
         (totalNumberPages / ServicesConstants.totalWidgetPagePerScreen).ceil();
   }
 
-  onChangedText(String text) {
-    if (text.isEmpty) {
-      listCharactersSearched.clear();
-      refresh();
-    } else {
-      final mainListCharacters = value;
-
-      final search = mainListCharacters
-          ?.where((element) =>
-              element.name.toLowerCase().contains(text.toLowerCase()))
-          .toList();
-      listCharactersSearched.value = List.from(search ?? []);
-      refresh();
-    }
-  }
-
   goToDetailsPage({required CharacterEntity characterEntity}) {
     Get.to(() => CharacterDetailsPage(), arguments: characterEntity);
-  }
-
-  onTapCloseButton() {
-    textSearchController.clear();
-    listCharactersSearched.clear();
-    refresh();
   }
 }
